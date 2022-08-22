@@ -34,6 +34,16 @@ def root(path):
             }
         logging.warn("Invalid Authentication: %s {}".format(request.remote_addr))
         return (error_message, 401)
+    
+    # Content type check and erroring
+    request_type = request.headers['Content-Type']
+    if request_type != "application/json"
+        error_message = {
+            "err_field": "Content-Type",
+            "err_message": "Unsupported Media Type"
+            }
+        logging.warn("Unsupported Media Type: {}".format(request.remote_addr))
+        return (error_message, 415)  
 
     #Get json from body of request
     data = request.get_json()
